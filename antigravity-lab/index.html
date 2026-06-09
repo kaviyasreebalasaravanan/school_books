@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anti-Gravity Research Laboratory | Interactive Physics Learning</title>
+  <meta name="description" content="NASA-style interactive physics lab where Grade 6-12 students explore gravity, anti-gravity, weightlessness, and magnetic levitation through virtual experiments.">
+  <meta name="keywords" content="physics, gravity, anti-gravity, maglev, education, interactive, science lab">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== LOADING SCREEN ========== -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-core">
+      <div class="loading-ring ring-1"></div>
+      <div class="loading-ring ring-2"></div>
+      <div class="loading-ring ring-3"></div>
+      <div class="loading-logo">AG</div>
+    </div>
+    <div class="loading-text">ANTI-GRAVITY RESEARCH LABORATORY</div>
+    <div class="loading-subtitle">Initializing Physics Systems...</div>
+    <div class="loading-bar-wrap">
+      <div class="loading-bar" id="loading-bar"></div>
+    </div>
+    <div class="loading-status" id="loading-status">Loading Three.js Environment...</div>
+  </div>
+
+  <!-- ========== THREE.JS BACKGROUND ========== -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- ========== MAIN APP ========== -->
+  <div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="lab-logo">
+          <div class="logo-orb"></div>
+          <div class="logo-text">
+            <span class="logo-title">ANTI-GRAVITY</span>
+            <span class="logo-sub">Research Laboratory</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section-label">MISSION MODULES</div>
+        <button class="nav-btn active" data-module="intro" id="nav-intro">
+          <span class="nav-icon">🌌</span><span class="nav-label">Mission Control</span>
+        </button>
+        <button class="nav-btn" data-module="module1" id="nav-module1">
+          <span class="nav-icon">⚛️</span><span class="nav-label">Gravity Formula</span>
+          <span class="nav-badge" id="badge-module1"></span>
+        </button>
+        <button class="nav-btn" data-module="module2" id="nav-module2">
+          <span class="nav-icon">🪐</span><span class="nav-label">Planet Simulator</span>
+          <span class="nav-badge" id="badge-module2"></span>
+        </button>
+        <button class="nav-btn" data-module="module3" id="nav-module3">
+          <span class="nav-icon">🌀</span><span class="nav-label">Zero-G Chamber</span>
+          <span class="nav-badge" id="badge-module3"></span>
+        </button>
+        <button class="nav-btn" data-module="module4" id="nav-module4">
+          <span class="nav-icon">🛰️</span><span class="nav-label">Space Station</span>
+          <span class="nav-badge" id="badge-module4"></span>
+        </button>
+        <button class="nav-btn" data-module="module5" id="nav-module5">
+          <span class="nav-icon">⚡</span><span class="nav-label">Anti-Gravity Lab</span>
+          <span class="nav-badge" id="badge-module5"></span>
+        </button>
+        <button class="nav-btn" data-module="module6" id="nav-module6">
+          <span class="nav-icon">🧲</span><span class="nav-label">Maglev Demo</span>
+          <span class="nav-badge" id="badge-module6"></span>
+        </button>
+        <button class="nav-btn" data-module="module7" id="nav-module7">
+          <span class="nav-icon">🚄</span><span class="nav-label">Maglev Train</span>
+          <span class="nav-badge" id="badge-module7"></span>
+        </button>
+
+        <div class="nav-section-label" style="margin-top:20px;">EXTRAS</div>
+        <button class="nav-btn" data-module="challenges" id="nav-challenges">
+          <span class="nav-icon">🏆</span><span class="nav-label">Challenges</span>
+        </button>
+        <button class="nav-btn" data-module="applications" id="nav-applications">
+          <span class="nav-icon">🌍</span><span class="nav-label">Real World</span>
+        </button>
+        <button class="nav-btn" data-module="dashboard" id="nav-dashboard">
+          <span class="nav-icon">📊</span><span class="nav-label">Dashboard</span>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="xp-card">
+          <div class="xp-label">SCIENTIST XP</div>
+          <div class="xp-value" id="sidebar-xp">0 XP</div>
+          <div class="xp-bar-wrap"><div class="xp-bar" id="sidebar-xp-bar"></div></div>
+          <div class="xp-level" id="sidebar-level">🥉 Junior Scientist</div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="main-content"></main>
+
+    <!-- AI TEACHER PANEL -->
+    <div class="teacher-panel" id="teacher-panel">
+      <div class="teacher-avatar">
+        <div class="teacher-robot">
+          <div class="teacher-head">
+            <div class="teacher-eye left" id="eye-left"></div>
+            <div class="teacher-eye right" id="eye-right"></div>
+            <div class="teacher-mouth" id="teacher-mouth"></div>
+            <div class="teacher-antenna"></div>
+          </div>
+          <div class="teacher-torso">
+            <div class="teacher-core"></div>
+            <div class="teacher-arm left-arm"></div>
+            <div class="teacher-arm right-arm"></div>
+          </div>
+        </div>
+        <div class="teacher-name-tag">DR. NEWTON</div>
+      </div>
+      <div class="teacher-bubble">
+        <div class="teacher-dialogue" id="teacher-dialogue">
+          Initializing AI Physics Teacher... Stand by!
+        </div>
+        <div class="teacher-controls">
+          <button class="teacher-ctrl-btn" id="btn-speak" title="Read Aloud">🔊</button>
+          <button class="teacher-ctrl-btn" id="btn-hint" title="Get Hint">💡</button>
+          <button class="teacher-ctrl-btn" id="btn-mute" title="Toggle Mute">🔇</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CELEBRATION OVERLAY -->
+    <div class="celebration-overlay hidden" id="celebration-overlay">
+      <div class="confetti-container" id="confetti-container"></div>
+      <div class="celebration-box">
+        <div class="celeb-icon" id="celeb-icon">🎉</div>
+        <div class="celeb-title">EXPERIMENT COMPLETE!</div>
+        <div class="celeb-xp" id="celeb-xp">+25 XP</div>
+        <div class="celeb-msg" id="celeb-msg">Outstanding work, Scientist!</div>
+        <button class="btn-primary" id="btn-celeb-close">Continue Research →</button>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast-area" id="toast-area"></div>
+
+  </div><!-- end #app -->
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+          onerror="console.warn('Three.js CDN failed')"></script>
+  <script src="three-scene.js"></script>
+  <script src="modules/module1-gravity.js"></script>
+  <script src="modules/module2-planets.js"></script>
+  <script src="modules/module3-weightless.js"></script>
+  <script src="modules/module4-spacestation.js"></script>
+  <script src="modules/module5-antigravity.js"></script>
+  <script src="modules/module6-maglev-demo.js"></script>
+  <script src="modules/module7-maglev-train.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
