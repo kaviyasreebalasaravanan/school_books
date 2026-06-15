@@ -184,9 +184,7 @@ export default function Lesson6_Fractions({ setTeacherMsg }) {
               make it for 24 people, you multiply every ingredient fraction by 3. A chef who does not understand
               fractions will ruin every dish!
             </p>
-            <div style={{ background: '#2EC4B6', color: 'white', display: 'inline-block', padding: '8px 20px', borderRadius: '20px', fontWeight: 'bold' }}>
-              Average Salary: ₹4-15 LPA 🍽️
-            </div>
+
           </div>
         </div>
       </div>

@@ -196,9 +196,7 @@ export default function Lesson1_Numbers({ setTeacherMsg }) {
               encryption systems that protect billions of people online. When you see the 🔒 in your browser,
               that is Prime Number mathematics keeping you safe!
             </p>
-            <div style={{ marginTop: '12px', background: '#FF6B6B', color: 'white', display: 'inline-block', padding: '8px 20px', borderRadius: '20px', fontWeight: 'bold' }}>
-              Average Salary: ₹8-25 LPA 🎯
-            </div>
+
           </div>
         </div>
       </div>
